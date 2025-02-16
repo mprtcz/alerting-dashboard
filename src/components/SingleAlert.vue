@@ -1,5 +1,5 @@
 <template>
-  <div class="alert" :style="{ backgroundColor: alertColor }">
+  <div class="alert" :style="alertStyle">
     <div>{{ alert.check.application }}</div>
     <LinkIcons :icons="alert.check.links" />
   </div>
@@ -32,6 +32,14 @@ export default {
           return "#FFFFFF"; // Default to white if status is unknown
       }
     },
+    alertStyle() {
+      return {
+        padding: "10px",
+        margin: "5px",
+        borderRadius: "5px",
+        backgroundColor: this.alertColor,
+      };
+    }
   },
 };
 </script>

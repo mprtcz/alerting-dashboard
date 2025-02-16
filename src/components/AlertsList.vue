@@ -32,9 +32,8 @@ export default {
     },
     gridStyle() {
       return {
-        display: "grid",
-        gridTemplateColumns: `repeat(${this.columns}, 1fr)`,
-        gap: "10px",
+        display: "flex",
+        justifyContent: "center",
       };
     },
   },
