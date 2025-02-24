@@ -1,7 +1,11 @@
 <template>
   <div class="alert" :style="alertStyle">
-    <div>{{ alert.check.application }}</div>
-    <LinkIcons :icons="alert.check.links" />
+    <div class="app-name">{{ alert.application }}</div>
+    <div v-for="(detail, index) in alert.groupedFields" :key="index">
+      <div>{{ detail.name }}</div>
+      <div>{{ detail.output }}</div>
+    </div>
+    <LinkIcons :icons="alert.links" />
   </div>
 </template>
 
@@ -21,7 +25,7 @@ export default {
   },
   computed: {
     alertColor() {
-      switch (this.alert.check.status) {
+      switch (this.alert.status) {
         case "0":
           return "#A5D6A7"; // Light Green
         case "1":
@@ -39,7 +43,7 @@ export default {
         borderRadius: "5px",
         backgroundColor: this.alertColor,
       };
-    }
+    },
   },
 };
 </script>
@@ -50,5 +54,9 @@ export default {
   margin: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.app-name {
+  font-weight: bold;
 }
 </style>
