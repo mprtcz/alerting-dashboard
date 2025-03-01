@@ -4,8 +4,8 @@
     <div class="app-name">{{ transformName(alert.application) }}</div>
     <div class="all-alerts">
       <div v-for="(detail, index) in alert.groupedFields" :key="index" class="single-alert">
-        <div class="alert-detail">{{ detail.name }}</div>
-        <div class="alert-detail">{{ detail.output }}</div>
+        <div v-if="showName" class="alert-detail">{{ detail.name }}</div>
+        <div v-if="showOutput" class="alert-detail">{{ detail.output }}</div>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <a v-if="detail.url" :href="detail.url" target="_blank">
           <i class="material-icons">open_in_new</i>
@@ -59,6 +59,7 @@ export default {
         .join(' ');
     },
   },
+  inject: ['showName', 'showOutput']
 };
 </script>
 
