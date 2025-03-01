@@ -1,4 +1,5 @@
 <template>
+  <CountdownBar  v-if="duration" :duration="60" />
   <div>
     <div>
       <div v-for="alert in alertsGroupedBySeverity[2]" :key="alert.id" class="alert-item">
@@ -18,11 +19,13 @@
 import $ from "jquery";
 import SingleAlert from "./SingleAlert.vue";
 import { toRaw } from 'vue';
+import CountdownBar from "./CountdownBar.vue";
 
 export default {
   name: "AlertsList",
   components: {
     SingleAlert,
+    CountdownBar,
   },
   data() {
     return {
@@ -77,6 +80,7 @@ export default {
   mounted() {
     // Extract columns parameter from URL
     this.columns = parseInt(this.$route.query.columns) || 1;
+    console.log(this.refreshSeconds);
 
     $.ajax({
       url: "http://localhost:8081/data",
