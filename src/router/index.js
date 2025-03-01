@@ -4,8 +4,8 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import AlertsList from '@/components/AlertsList.vue'
 
 const routes = [
-  { path: '/', component: HelloWorld },
-  { path: '/alerts', component: AlertsList },
+  { path: '/', component: AlertsList },
+  { path: '/alerts', component: HelloWorld },
   { path: '/about', component: AboutPage }
 ]
 

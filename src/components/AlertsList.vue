@@ -1,16 +1,12 @@
 <template>
   <div>
-    <h1>Alerts</h1>
-    <div :style="gridStyle">
-      Critical:
+    <div>
       <div v-for="alert in alertsGroupedBySeverity[2]" :key="alert.id" class="alert-item">
         <SingleAlert :alert="alert" />
       </div>
-      Warning:
       <div v-for="alert in alertsGroupedBySeverity[1]" :key="alert.id" class="alert-item">
         <SingleAlert :alert="alert" />
       </div>
-      Ok:
       <div v-for="alert in alertsGroupedBySeverity[0]" :key="alert.id" class="alert-item">
         <SingleAlert :alert="alert" />
       </div>
@@ -50,30 +46,29 @@ export default {
         return acc;
       }, {});
 
-      console.log("grouped alerts = ", groupedAlerts);
-
-      const result = {};
+      const groupedByApplication = {};
 
       for (const [key, objects] of Object.entries(groupedAlerts)) {
-        result[key] = Object.values(objects.reduce((acc, obj) => {
+        groupedByApplication[key] = Object.values(objects.reduce((acc, obj) => {
           const key = obj.check.application;
 
           if (!acc[key]) {
             acc[key] = { application: obj.check.application, groupedFields: [], links: obj.check.links, status: obj.check.status };
           }
 
-          acc[key].groupedFields.push({ name: obj.check.name, output: obj.check.output });
+          acc[key].groupedFields.push({ name: obj.check.name, output: obj.check.output, url: obj.check.url });
 
           return acc;
         }, {}));
       }
-      console.log(toRaw(result))
+      console.log(toRaw(groupedByApplication))
 
-      return result;
+      return groupedByApplication;
     },
     gridStyle() {
       return {
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         flexWrap: "wrap",
       };

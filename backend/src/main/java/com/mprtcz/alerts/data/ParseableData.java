@@ -34,9 +34,9 @@ public class ParseableData {
 
     public static ParseableData createData(String client, String application, String name, String output, String status,
             String kibanaLogs, String kibanaAccessLogs, String kubernetes, String jenkins,
-            String bitbucket, String swagger, Map<String, String> grafana) {
+            String bitbucket, String swagger, Map<String, String> grafana, String url) {
                 ParseableLinks links = new ParseableLinks(kibanaLogs, kibanaAccessLogs, kubernetes, jenkins, bitbucket, swagger, grafana);
-        ParseableCheck check = new ParseableCheck(application, name, output, status, links);
+        ParseableCheck check = new ParseableCheck(application, name, output, status, links, url);
         return new ParseableData(client, check);
     }
 
@@ -53,13 +53,19 @@ class ParseableCheck {
     private String output;
     private String status;
     private ParseableLinks links;
+    private String url;
 
-    public ParseableCheck(String application, String name, String output, String status, ParseableLinks links) {
+    public ParseableCheck(String application, String name, String output, String status, ParseableLinks links, String url) {
         this.application = application;
         this.name = name;
         this.output = output;
         this.status = status;
         this.links = links;
+        this.url = url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getApplication() {
@@ -100,6 +106,10 @@ class ParseableCheck {
 
     public void setLinks(ParseableLinks links) {
         this.links = links;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }
 

@@ -1,11 +1,17 @@
 <template>
-  <div class="alert" :style="alertStyle">
-    <div class="app-name">{{ alert.application }}</div>
-    <div v-for="(detail, index) in alert.groupedFields" :key="index">
-      <div>{{ detail.name }}</div>
-      <div>{{ detail.output }}</div>
-    </div>
+  <div class="alert-top" :style="alertStyle">
     <LinkIcons :icons="alert.links" />
+    <div class="app-name">{{ transformName(alert.application) }}</div>
+    <div class="all-alerts">
+      <div v-for="(detail, index) in alert.groupedFields" :key="index" class="single-alert">
+        <div class="alert-detail">{{ detail.name }}</div>
+        <div class="alert-detail">{{ detail.output }}</div>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <a v-if="detail.url" :href="detail.url" target="_blank">
+          <i class="material-icons">open_in_new</i>
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,9 +35,9 @@ export default {
         case "0":
           return "#A5D6A7"; // Light Green
         case "1":
-          return "#FFF59D"; // Light Yellow
+          return "#FFE082"; // Light Yellow
         case "2":
-          return "#EF9A9A"; // Light Red
+          return "#E57373"; // Light Red
         default:
           return "#FFFFFF"; // Default to white if status is unknown
       }
@@ -45,18 +51,53 @@ export default {
       };
     },
   },
+  methods: {
+    transformName(name) {
+      return name
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    },
+  },
 };
 </script>
 
 <style>
-.alert {
+.alert-top {
   padding: 10px;
   margin: 5px;
-  border: 1px solid #ccc;
   border-radius: 5px;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .app-name {
   font-weight: bold;
+  width: 15%;
+  word-wrap: break-word;
+  word-break: break-all;
+  text-align: right;
+  margin: 0 10px 0 10px;
+}
+
+.single-alert {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.all-alerts {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  text-align: left;
+}
+
+.alert-detail {
+  width: 450%
 }
 </style>

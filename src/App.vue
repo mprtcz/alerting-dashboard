@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <router-link to="/" class="button">Home</router-link>
-    <router-link to="/about" class="button">About</router-link>
-    <router-link to="/alerts" class="button">Alerts</router-link>
     <router-view></router-view>
   </div>
 </template>
