@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/alerting-dashboard.iml" filepath="$PROJECT_DIR$/.idea/alerting-dashboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alerting-dashboard-react/alerting-dashboard-react.iml" filepath="$PROJECT_DIR$/alerting-dashboard-react/alerting-dashboard-react.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fe-vue/fe-vue.iml" filepath="$PROJECT_DIR$/fe-vue/fe-vue.iml" />
+    </modules>
+  </component>
+</project>
